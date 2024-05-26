@@ -1,8 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
-#include "TcpServer.h"
-
+#include "TcpClient.h"
 int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
@@ -16,8 +15,8 @@ int main(int argc, char *argv[])
         if (!obj && url == objUrl)
             QCoreApplication::exit(-1);
     }, Qt::QueuedConnection);
-    TcpServer tcpServer;
-    engine.rootContext()->setContextProperty("server", &tcpServer);
+    TcpClient tcpclient;
+    engine.rootContext()->setContextProperty("client", &tcpclient);
     engine.load(url);
 
     return app.exec();
