@@ -8,15 +8,16 @@ Window {
     width: 640
     height: 640
     title: qsTr("Chat-A-Lot-Client")
+    //создание сообщений
     Connections {
             target: client
             function onNewMessage(ba) {
                 listModelMessages.append({
-                                             message: ba + ""
+                                             message: ba + " "
                                          })
             }
         }
-
+    //ввод ip адреса сервера и имени пользователя
         ColumnLayout {
             anchors.fill: parent
             RowLayout {
@@ -28,17 +29,18 @@ Window {
                     onAccepted: buttonConnect.clicked()
                 }
                 TextField {
-                    id: textFieldPort
-                    placeholderText: qsTr("Порт сервера")
+                    id: textFieldUser
+                    placeholderText: qsTr("Имя пользователя")
                     Layout.fillWidth: true
                     onAccepted: buttonConnect.clicked()
                 }
                 Button {
                     id: buttonConnect
-                    text: qsTr("Connect")
-                    onClicked: client.connectToServer(textFieldIp.text, textFieldPort.text)
+                    text: qsTr("Приоединиться")
+                    onClicked: client.connectToServer(textFieldIp.text, 30000, textFieldUser.text)
                 }
             }
+            //вывод на экран сообщений
             ListView {
                 Layout.fillHeight: true
                 Layout.fillWidth: true
@@ -46,7 +48,7 @@ Window {
                 model: ListModel {
                     id: listModelMessages
                     ListElement {
-                        message: "Добро пожаловать в чат"
+                        message: "Добро пожаловать в мессенджер"
                     }
                 }
                 delegate: ItemDelegate {
@@ -54,6 +56,7 @@ Window {
                 }
                 ScrollBar.vertical: ScrollBar {}
             }
+            //отправка сообщений
             RowLayout {
                 Layout.fillWidth: true
                 TextField {

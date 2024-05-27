@@ -7,8 +7,9 @@ ApplicationWindow {
     visible: true
     width: 640
     height: 640
-    title: qsTr("Chat-a-lot")
+    title: qsTr("Chat-a-lot server")
 
+    //создание сообщений
     Connections{
         target : server
         function onNewMessage(ba)
@@ -20,7 +21,7 @@ ApplicationWindow {
         }
 
     }
-
+//вывод сообщений на экран
     ColumnLayout{
         anchors.fill: parent
         ListView{
@@ -38,22 +39,7 @@ ApplicationWindow {
             }
             ScrollBar.vertical: ScrollBar{}
         }
-        RowLayout{
-            TextField{
-                id: textFilledMessage
-               placeholderText: qsTr("Ваше сообщение")
-               Layout.fillWidth: true
-               onAccepted:  buttonSend.clicked()
-            }
-            Button{
-                id: buttonSend
-                text: qsTr("Отправить")
-                onClicked: {
 
-                    console.log("Сообщение отправлено")
-                    textFilledMessage.clear()
-                }
-            }
         }
     }
-}
+

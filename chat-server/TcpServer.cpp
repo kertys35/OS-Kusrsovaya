@@ -15,6 +15,8 @@ void TcpServer::onNewConnection()
         return;
     }
       qInfo() <<"Подключился новый пользователь";
+      emit newMessage("Новый пользователь подлючился к чату");
+      //добавляем нового клиента в список клиентов и обрабатываем его запросы
        _clients.insert(this->getClientKey(client),client);
        connect(client, &QTcpSocket::readyRead, this, &TcpServer::onReadyRead);
        connect(client, &QTcpSocket::disconnected, this, &TcpServer::onDisconnected);
@@ -33,21 +35,24 @@ void TcpServer::onDisconnected()
         return;
     }
     _clients.remove(this->getClientKey(client));
+    emit newMessage("Пользователь отключился от чата");
 }
 
 void TcpServer::onReadyRead()
 {
+    //считываем и выводи информацию с соккета
  const auto client = qobject_cast<QTcpSocket*>(sender());
  if(client==nullptr)
  {
      return;
  }
- const auto message =this->getClientKey(client).toUtf8() + ": " + client->readAll();
+ const auto message =client->readAll();
  emit newMessage(message);
 }
 
 void TcpServer::onNewMessage(const QByteArray &byte)
 {
+     //записываем информацию нового сообщения
     for(const auto &client : qAsConst(_clients))
     {
         client->write(byte);

@@ -15,6 +15,7 @@ int main(int argc, char *argv[])
         if (!obj && url == objUrl)
             QCoreApplication::exit(-1);
     }, Qt::QueuedConnection);
+    //добавляем контекст клиента
     TcpClient tcpclient;
     engine.rootContext()->setContextProperty("client", &tcpclient);
     engine.load(url);

@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QTcpSocket>
+#include <QDateTime>
 
 class TcpClient : public QObject
 {
@@ -12,16 +13,16 @@ public:
 
 signals:
     void newMessage(const QByteArray &ba);
-
 public slots:
-    void connectToServer(const QString &ip, const QString &port);
+    void connectToServer(const QString &ip, const QString &port,const QString &name);
     void sendMessage(const QString &message);
-
 private slots:
     void onConnected();
     void onReadyRead();
+    void onDisconnected();
 private:
     QTcpSocket _socket;
+    QString Nickname;
 };
 
 #endif // TCPCLIENT_H
