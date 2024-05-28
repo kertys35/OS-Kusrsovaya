@@ -21,8 +21,8 @@ private slots:
 private:
     QString getClientKey(const QTcpSocket *client);//получаем идентификатор клиента
 private:
-    QTcpServer _server;//наш сервер
-    QHash <QString, QTcpSocket*> _clients;//подключенные клиенты
+    QTcpServer Server;//наш сервер
+    QHash <QString, QTcpSocket*> Clients;//подключенные клиенты
 };
 
 #endif // TCPSERVER_H

@@ -39,6 +39,14 @@ Window {
                     text: qsTr("Приоединиться")
                     onClicked: client.connectToServer(textFieldIp.text, 30000, textFieldUser.text)
                 }
+                Button {
+                    id: buttonDisconnect
+                    text: qsTr("Отключиться")
+                    onClicked: {
+                        client.disconnectFromServer()
+                        textFieldIp.clear()
+                    }
+                }
             }
             //вывод на экран сообщений
             ListView {
