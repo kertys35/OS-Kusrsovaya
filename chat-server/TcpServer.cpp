@@ -10,7 +10,7 @@ TcpServer::TcpServer(QObject *parent) : QObject(parent)
 }
 void TcpServer::onNewConnection()
 {
-    //заносится новый соккет в список соккетов клиентов
+    //заносится новый сокет в список сокетов клиентов
     const auto client=Server.nextPendingConnection();
     if(client==nullptr)
     {
@@ -32,7 +32,7 @@ QString TcpServer::getClientKey(const QTcpSocket *client)
 
 void TcpServer::onDisconnected()
 {
-    //в случае отключения пользователя выводим сообщение и исключаем соккет из списка клиентов
+    //в случае отключения пользователя выводим сообщение и исключаем сокет из списка клиентов
     const auto client = qobject_cast<QTcpSocket*>(sender());
     if(client==nullptr)
     {
@@ -44,7 +44,7 @@ void TcpServer::onDisconnected()
 
 void TcpServer::onReadyRead()
 {
-    //считываем и выводим информацию с соккета
+    //считываем и выводим информацию с сокета
  const auto client = qobject_cast<QTcpSocket*>(sender());
  if(client==nullptr)
  {
@@ -56,7 +56,7 @@ void TcpServer::onReadyRead()
 
 void TcpServer::onNewMessage(const QByteArray &byte)
 {
-     //записываем информацию нового сообщения на все соккеты подлюченных клиентов
+     //записываем информацию нового сообщения на все сокеты подлюченных клиентов
     for(const auto &client : qAsConst(Clients))
     {
         client->write(byte);

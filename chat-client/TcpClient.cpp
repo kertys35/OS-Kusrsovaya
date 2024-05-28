@@ -2,14 +2,14 @@
 
 TcpClient::TcpClient(QObject *parent) : QObject(parent)
 {
-    //инициализация соккета
+    //инициализация сокета
     connect(&Socket, &QTcpSocket::connected, this, &TcpClient::onConnected);
     connect(&Socket, &QTcpSocket::readyRead, this, &TcpClient::onReadyRead);
 }
 
 void TcpClient::connectToServer(const QString &ip, const QString &port,const QString &name)
 {
-    //присоединение соккета к серверу
+    //присоединение сокета к серверу
     Socket.connectToHost(ip, port.toUInt());
     Nickname=name;
     connect(&Socket, &QTcpSocket::disconnected, this, &TcpClient::onDisconnected);

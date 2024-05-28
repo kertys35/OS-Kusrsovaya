@@ -39,6 +39,7 @@ Window {
                     text: qsTr("Приоединиться")
                     onClicked: client.connectToServer(textFieldIp.text, 30000, textFieldUser.text)
                 }
+                //кнопка отключения от чата
                 Button {
                     id: buttonDisconnect
                     text: qsTr("Отключиться")

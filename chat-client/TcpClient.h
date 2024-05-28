@@ -22,7 +22,7 @@ private slots:
     void onReadyRead();//в случае обмена сообщениями
     void onDisconnected();//в случае отключения
 private:
-    QTcpSocket Socket;//соккет, через который происходит подключение
+    QTcpSocket Socket;//сокет, через который происходит подключение
     QString Nickname;//имя пользователя
 };
 
